@@ -43,7 +43,7 @@ describe('Linear Scale', function() {
 				display: true,
 				callback: defaultConfig.ticks.callback, // make this work nicer, then check below
 				autoSkip: true,
-				autoSkipPadding: 20
+				autoSkipSpacing: 20
 			}
 		});
 

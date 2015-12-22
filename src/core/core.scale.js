@@ -47,7 +47,7 @@
 			reverse: false,
 			display: true,
 			autoSkip: true,
-		    autoSkipPadding: 20,
+		    autoSkipSpacing: 20,
 			callback: function(value) {
 				return '' + value;
 			},
@@ -455,8 +455,11 @@
 					var yTickEnd = this.options.position === "bottom" ? this.top + 10 : this.bottom;
 					skipRatio = false;
 
-					if ((this.options.ticks.fontSize * maxLength) * this.ticks.length > (this.width - (this.paddingLeft + this.paddingRight))) {
-					    skipRatio = 1 + Math.floor((((this.options.ticks.fontSize * maxLength / 2) + this.options.ticks.autoSkipPadding) * this.ticks.length) / (this.width - (this.paddingLeft + this.paddingRight)));
+					labelFont = helpers.fontString(this.options.ticks.fontSize, this.options.ticks.fontStyle, this.options.ticks.fontFamily);
+					var largestTextWidth = helpers.longestText(this.ctx, labelFont, this.ticks);
+
+					if (largestTextWidth * this.ticks.length > (this.width - (this.paddingLeft + this.paddingRight))) {
+						skipRatio = 1 + Math.floor(((largestTextWidth + this.options.ticks.autoSkipSpacing) * this.ticks.length) / (this.width - (this.paddingLeft + this.paddingRight)));
 					}
 
 					if (!useAutoskipper) {
